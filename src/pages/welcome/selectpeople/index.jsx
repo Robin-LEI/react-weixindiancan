@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, $message} from 'react'
 import {Route} from 'react-router-dom'
 import {getQueryString} from '../../../utils/tools'
 import {addPeople} from '../../../service/methods/welcome.js'
@@ -7,10 +7,12 @@ import Styles from './index.module.less'
 const SelectPeople = (props) => {
   
   const [activeNum, setActiveNum] = useState(0)
+  const [tableNum, setTableNum] = useState(0)
 
   useEffect(() => {
+    
     const {tableNum} = getQueryString()
-    setActiveNum(tableNum)
+    setTableNum(tableNum)
   }, [])
 
   const handleClick = () => {
@@ -21,14 +23,14 @@ const SelectPeople = (props) => {
       tableNum,
       people: activeNum
     }).then(res => {
-      console.log(res)
+      $message.success('添加成功')
     }).catch(err => {
       throw Error(err)
     })
   }
 
   return <div className={Styles.selectPeople}>
-    <h3>{activeNum}号</h3>
+    <h3>{tableNum}号</h3>
     <div>用餐人数</div>
     <span>请选择正确的用餐人数</span>
     <ul>
