@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const fileHandle = require('../utils/fileHandle')
+const unique = require('../utils/Unique')
+const createTime = require('../utils/creatTime')
 
 
 // 根据店铺id获取商铺的菜单等详细信息
@@ -60,6 +62,22 @@ router.get('/getMenuList', async (req, res, next) => {
   })
 })
 
+// 呼叫服务员
+router.post('/callout', async(req, res, next) => {
+  let {shopId, userId, tableNum} = req.body
+ 
+  await fileHandle.add('../files/callout', {
+    id: unique(),
+    shopId: shopId,
+    userId: userId,
+    tableNum: tableNum,
+    createTime: createTime()
+  })
 
+  res.send({
+    msg: 'success',
+    code: 200
+  })
+})
 
 module.exports = router
