@@ -15,3 +15,5 @@
 
 # 带参路由
 1. http://localhost:3000/?userId=orH6d1BlTsF3LiogJRJ3322BPREaSzz8&shopId=b9a5eea53c8d4f154174dbff53892e24#/welcome/shop
+
+# 多功能接口
