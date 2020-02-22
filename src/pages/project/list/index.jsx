@@ -11,6 +11,7 @@ import Styles from './index.module.less'
 const List = (props) => {
   const {history} = props
   let [list, setList] = useState([])
+  let [scroll, setScroll] = useState(null)
 
   useEffect(() => {
     getMenuList(getQueryString().shopId).then(async res => {
@@ -25,17 +26,21 @@ const List = (props) => {
     let scroll = new BScroll('#scroll', {
       click: true
     })
-
+    setScroll(scroll)
     return () => {
       scroll.destroy()
     }
   }, [])
-
+  const getClickedEle = (index) => {
+    const top = document.getElementById(index).offsetTop
+    // 0: x轴移动距离  -top：y轴往上移动指定距离  1000：在1秒内完成
+    scroll.scrollTo(0, -top, 1000)
+  }
 
   return <div>
     <SearchBtn cb={() => {history.push('/project/search')}} icon="icon-search" />
     <BtnLink cb={() => {history.push('/project/shop')}} icon="icon-shop_fill" style={{bottom: '0.4rem', right: '0.2rem'}}>购物车</BtnLink>
-    <MenuItems list={list}></MenuItems>
+    <MenuItems list={list} getClickedEle={getClickedEle}></MenuItems>
     <div id='scroll' className={Styles.list}>
       <main>
         <nav>
@@ -61,7 +66,7 @@ const List = (props) => {
           {
             list.map(item => {
               const {name, items, index} = item
-              return <section key={index}>
+              return <section key={index} id={index}>
                 <h3>{name}</h3>
                 <ul>
                   {

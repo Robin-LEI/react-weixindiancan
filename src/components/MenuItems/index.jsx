@@ -4,8 +4,8 @@ import Styles from './index.module.less'
 
 const MenuItems = (props) => {
   const [active, setActive] = useState(false)
-  const [scroll, setScroll] = useState(null)
-  const {list} = props
+  
+  const {list, getClickedEle} = props
   useEffect(() => {
     const scroll = new BScroll("#asideLeft", {
       click: true
@@ -16,7 +16,8 @@ const MenuItems = (props) => {
   }, [])
   const handleClickMenuItem = (index) => {
     setActive(false)
-    console.log(index)
+    // 把index标识传递给父元素
+    getClickedEle(index)
   }
   return <div className={active?(Styles.active+" "+Styles.menuItems):Styles.menuItems}>
     <aside className={Styles.asideLeft} id="asideLeft">
