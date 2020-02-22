@@ -3,14 +3,17 @@ import {Route, Link} from 'react-router-dom'
 import BScroll from 'better-scroll'
 import {getMenuList} from '../../../service/methods/project'
 import {getQueryString} from '../../../utils/tools'
+import SearchBtn from '../../../components/SearchBtn/index.jsx'
+import BtnLink from '../../../components/BtnLink/index.jsx'
 import Styles from './index.module.less'
 
 const List = (props) => {
-  
+  const {history} = props
+  let [list, setList] = useState([])
 
   useEffect(() => {
-    getMenuList(getQueryString().shopId).then(res => {
-      console.log(res)
+    getMenuList(getQueryString().shopId).then(async res => {
+      await setList(res.data.kindMenus)
     }).catch(err => {
       $message.error(err)
     })
@@ -29,6 +32,8 @@ const List = (props) => {
 
 
   return <div>
+    <SearchBtn cb={() => {history.push('/project/search')}} icon="icon-search" />
+    <BtnLink cb={() => {history.push('/project/shop')}} icon="icon-shop_fill" style={{bottom: '0.4rem', right: '0.2rem'}}>购物车</BtnLink>
     <div id='scroll' className={Styles.list}>
       <main>
         <nav>
@@ -49,6 +54,30 @@ const List = (props) => {
             <span>服务铃</span>
           </a>
         </nav>
+        {/* 列表 */}
+        <div className={Styles.wrapper}>
+          {
+            list.map(item => {
+              const {name, items, index} = item
+              return <section key={index}>
+                <h3>{name}</h3>
+                <ul>
+                  {
+                    items.map(map_item => {
+                      const {imagePath, name, memberPrice, id, price} = map_item
+                      return <li key={id}>
+                        <img src={imagePath} alt=""/>
+                        <h4>会员价：&yen;{memberPrice}</h4>
+                        <h5>原价：&yen;{price}</h5>
+                        <span>{name}</span>
+                      </li>
+                    })
+                  }
+                </ul>
+              </section>
+            })
+          }
+        </div>
       </main>
     </div>
   </div>
