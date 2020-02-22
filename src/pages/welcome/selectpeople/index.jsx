@@ -24,6 +24,9 @@ const SelectPeople = (props) => {
       people: activeNum
     }).then(res => {
       $message.success('添加成功')
+      setTimeout(() => {
+        props.history.push('/project/list')
+      }, 1000)
     }).catch(err => {
       throw Error(err)
     })

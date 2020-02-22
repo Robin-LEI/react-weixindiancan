@@ -11,7 +11,7 @@ import Lazy from './lazy.jsx'
 import Shop from '../pages/welcome/shop/index.jsx'
 
 const Welcome = Lazy(() => import('../pages/welcome/index.jsx'))
-// const Shop = Lazy(() => import('../pages/welcome/shop/index.jsx'))
+const Project = Lazy(() => import('../pages/project/index.jsx'))
 
 
 
@@ -24,6 +24,7 @@ function BrowserRouter() {
             return <Redirect to="/welcome/shop" />
           }}></Route> */}
           <Route path="/welcome" component={Welcome}></Route>
+          <Route path="/project" component={Project}></Route>
         </Switch>
       </App>
     </Router>
