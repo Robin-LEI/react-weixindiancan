@@ -1,11 +1,25 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import BScroll from 'better-scroll'
 import Styles from './index.module.less'
 
 const MenuItems = (props) => {
   const [active, setActive] = useState(false)
+  const [scroll, setScroll] = useState(null)
   const {list} = props
+  useEffect(() => {
+    const scroll = new BScroll("#asideLeft", {
+      click: true
+    })
+    return () => {
+      scroll.destroy()
+    }
+  }, [])
+  const handleClickMenuItem = (index) => {
+    setActive(false)
+    console.log(index)
+  }
   return <div className={active?(Styles.active+" "+Styles.menuItems):Styles.menuItems}>
-    <aside className={Styles.asideLeft}>
+    <aside className={Styles.asideLeft} id="asideLeft">
       <main>
         <ul>
           <li>分类</li>
@@ -22,7 +36,7 @@ const MenuItems = (props) => {
           {
             list.map(item => {
               const {name, index} = item
-              return <li key={index}>{name}</li>
+              return <li key={index} onClick={() => handleClickMenuItem(index)}>{name}</li>
             })
           }
         </ul>
