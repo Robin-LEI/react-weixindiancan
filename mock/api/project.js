@@ -42,8 +42,8 @@ router.get('/getMenuList', async (req, res, next) => {
   }
 
   // search
-  if (search != undefined) {
-    result = result.length ? result.map((mp_item) => {
+  if (search != undefined && search != 'undefined') {
+    result = result ? result.map((mp_item) => {
       if (mp_item.name.includes(search)) {
         return mp_item
       }

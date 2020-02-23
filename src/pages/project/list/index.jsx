@@ -17,7 +17,9 @@ const List = (props) => {
   let [callOut, setCallOut] = useState(false)
 
   useEffect(() => {
-    getMenuList(getQueryString().shopId).then(async res => {
+    getMenuList({
+      shopId: getQueryString().shopId
+    }).then(async res => {
       await setList(res.data.kindMenus)
     }).catch(err => {
       $message.error(err)
