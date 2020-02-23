@@ -1,7 +1,7 @@
 import React, {useState, useEffect, $message} from 'react'
 import {Route, Link} from 'react-router-dom'
 import BScroll from 'better-scroll'
-import {getMenuList} from '../../../service/methods/project'
+import {getMenuList, callOutPost} from '../../../service/methods/project'
 import {getQueryString} from '../../../utils/tools'
 import SearchBtn from '../../../components/SearchBtn/index.jsx'
 import BtnLink from '../../../components/BtnLink/index.jsx'
@@ -14,6 +14,7 @@ const List = (props) => {
   const {history} = props
   let [list, setList] = useState([])
   let [scroll, setScroll] = useState(null)
+  let [callOut, setCallOut] = useState(false)
 
   useEffect(() => {
     getMenuList(getQueryString().shopId).then(async res => {
@@ -33,10 +34,26 @@ const List = (props) => {
       scroll.destroy()
     }
   }, [])
+
   const getClickedEle = (index) => {
     const top = document.getElementById(index).offsetTop
     // 0: x轴移动距离  -top：y轴往上移动指定距离  1000：在1秒内完成
     scroll.scrollTo(0, -top, 1000)
+  }
+
+  // 确认服务铃
+  const confirm = () => {
+    const {userId, shopId, tableNum} = getQueryString()
+    setCallOut(false)
+    callOutPost({
+      userId: userId,
+      shopId: shopId,
+      tableNum: tableNum
+    }).then(res => {
+      $message.success('呼叫店小二成功')
+    }).catch(err => {
+      $message.error(err)
+    })
   }
 
   return <div>
@@ -44,7 +61,7 @@ const List = (props) => {
     <BtnLink cb={() => {history.push('/project/shop')}} icon="icon-shop_fill" style={{bottom: '0.4rem', right: '0.2rem'}}>购物车</BtnLink>
     <MenuItems list={list} getClickedEle={getClickedEle}></MenuItems>
     <Nav />
-    <CallOut />
+    {callOut && <CallOut cancel={() => setCallOut(false)} confirm={confirm} />}
     <div id='scroll' className={Styles.list}>
       <main>
         <nav>
@@ -60,7 +77,7 @@ const List = (props) => {
             <i className="iconfont icon-document_fill"></i>
             <span>点过的菜</span>
           </Link>
-          <a onClick={() => {}}>
+          <a onClick={() => {setCallOut(true)}}>
             <i className="iconfont icon-remind_fill"></i>
             <span>服务铃</span>
           </a>
