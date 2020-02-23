@@ -3,8 +3,9 @@ import api from '../api'
 
 // 获取菜单列表
 export function getMenuList(data = {}) {
-  const {shopId, type, search} = data
-  return http.get(`${api.getMenuListUrl}/?id=${shopId}&type=${type}&search=${search}`)
+  return http.get(`${api.getMenuListUrl}`, {
+    params:data
+  })
 }
 
 // 呼叫店小二

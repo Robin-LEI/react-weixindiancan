@@ -10,11 +10,11 @@ router.get('/getMenuList', async (req, res, next) => {
   // id：商铺id
   // type：为hot表示热搜商品
   // search：菜名搜索
-  const {id, type, search} = req.query
+  const {shopId, type, search} = req.query
   // 这个文件里面包含了所有店铺的相关的信息，需要根据店铺id进行筛选
   let result = await fileHandle.read('../files/memuList')
   result = result.find((item) => {
-    return item.shopId === id
+    return item.shopId === shopId
   }, [])
 
   // 根据type搜索热搜菜品
@@ -28,7 +28,6 @@ router.get('/getMenuList', async (req, res, next) => {
       return pre
     }, []) : []
   }
-  // console.log(result)
 
   if (type == false+'') {
     result = result ? result.kindMenus.reduce((pre, re_item) => {
@@ -42,16 +41,21 @@ router.get('/getMenuList', async (req, res, next) => {
   }
 
   // search
-  if (search != undefined && search != 'undefined') {
-    result = result ? result.map((mp_item) => {
-      if (mp_item.name.includes(search)) {
-        return mp_item
-      }
+  if (search != undefined) {
+    // console.log(11, result)
+    let arr = []
+    result = result ? result.kindMenus.map((mp_item) => {
+      const {items} = mp_item
+      items.forEach(it_item => {
+        if (it_item.name.includes(search)) {
+          arr.push(it_item)
+        }
+      })
     }): []
-
-    result = result.filter(fi_item => {
-      return fi_item && String(fi_item).trim()
-    }) 
+    result = arr
+    // result = result.filter(fi_item => {
+    //   return fi_item && String(fi_item).trim()
+    // }) 
   }
   
 
