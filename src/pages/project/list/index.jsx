@@ -6,6 +6,7 @@ import {getQueryString} from '../../../utils/tools'
 import SearchBtn from '../../../components/SearchBtn/index.jsx'
 import BtnLink from '../../../components/BtnLink/index.jsx'
 import MenuItems from '../../../components/MenuItems/index.jsx'
+import Nav from '../../../components/Nav/index.jsx'
 import Styles from './index.module.less'
 
 const List = (props) => {
@@ -41,6 +42,7 @@ const List = (props) => {
     <SearchBtn cb={() => {history.push('/project/search')}} icon="icon-search" />
     <BtnLink cb={() => {history.push('/project/shop')}} icon="icon-shop_fill" style={{bottom: '0.4rem', right: '0.2rem'}}>购物车</BtnLink>
     <MenuItems list={list} getClickedEle={getClickedEle}></MenuItems>
+    <Nav />
     <div id='scroll' className={Styles.list}>
       <main>
         <nav>
