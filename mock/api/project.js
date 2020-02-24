@@ -3,6 +3,7 @@ const router = express.Router()
 const fileHandle = require('../utils/fileHandle')
 const unique = require('../utils/Unique')
 const createTime = require('../utils/creatTime')
+const getALlMenus = require('../common/getAllMenus')
 
 
 // 根据店铺id获取商铺的菜单等详细信息
@@ -81,6 +82,22 @@ router.post('/callout', async(req, res, next) => {
   res.send({
     msg: 'success',
     code: 200
+  })
+})
+
+// 菜单详情
+router.get('/getAllMenus', async(req, res, next) => {
+  // 店铺id，菜品id
+  let {shopId, id} = req.query
+  let result = await getALlMenus.getAllMenus(shopId)
+  // 找到当前菜品id对应的信息
+  result = result.find(item => {
+    return item.id === id
+  })
+  res.send({
+    msg: 'success',
+    code: 200,
+    data: result
   })
 })
 
