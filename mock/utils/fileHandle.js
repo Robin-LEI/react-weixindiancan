@@ -27,12 +27,12 @@ module.exports = {
     })
   },
   async add(url, data) {
-    const result = await this.read(url)
+    let result = await this.read(url)
     result.push(data)
     await this.write(url, result)
   },
   async amend(url, data) {
-    const result = await this.read(url)
+    let result = await this.read(url)
     result = result.map(item => {
       if (item.id == data.id) {
         return data
@@ -42,10 +42,10 @@ module.exports = {
     })
     await this.write(url, result)
   },
-  async remove(url, id) {
-    const result = await this.read(url)
+  async remove(url, type, id) {
+    let result = await this.read(url)
     result = result.filter(item => {
-      return item.id != id
+      return item[type] != id
     })
     await this.write(url, result)
   }
