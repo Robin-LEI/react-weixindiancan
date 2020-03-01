@@ -2,6 +2,7 @@ import React from 'react'
 import List from './list/index.jsx'
 import HotList from './hotlist/index.jsx'
 import Search from './search/index.jsx'
+import Detail from './detail/index.jsx'
 
 const Project = (props) => {
   return <>
@@ -15,6 +16,7 @@ const RenderRouter = () => {
       <List />
       <HotList />
       <Search />
+      <Detail />
     </Project>
   )
 }

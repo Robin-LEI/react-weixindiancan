@@ -12,3 +12,10 @@ export function getMenuList(data = {}) {
 export function callOutPost(data) {
   return http.post(`${api.callOutUrl}`, data)
 }
+
+// 获取菜单详情
+export function getMenusDetail(data) {
+  return http.get(`${api.getMenusDetailUrl}`, {
+    params:data
+  })
+}

@@ -3,7 +3,7 @@ const router=express.Router()
 const fileHandle=require("../utils/fileHandle")
 const Unique=require("../utils/Unique")
 const creatTime=require("../utils/creatTime")
-const {readMenuList,getUsers}=require("./common/getInfo")
+const {readMenuList,getUsers}=require("../common/getInfo")
 
 const middle=async({shopId,tableNum})=>{
     let allOrder=await fileHandle.read("../files/order")

@@ -95,7 +95,7 @@ const List = (props) => {
                   {
                     items.map(map_item => {
                       const {imagePath, name, memberPrice, id, price} = map_item
-                      return <li key={id}>
+                      return <li key={id} onClick={() => history.push(`/project/detail/${id}`)}>
                         <img src={imagePath} alt=""/>
                         <h4>会员价：&yen;{memberPrice}</h4>
                         <h5>原价：&yen;{price}</h5>
