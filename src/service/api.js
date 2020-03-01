@@ -5,4 +5,8 @@ export default {
   getMenuListUrl: '/api/project/getMenuList', // 获取菜单列表
   callOutUrl: '/api/project/callout', // 呼叫店小二
   getMenusDetailUrl: '/api/project/getAllMenus', // 获取菜单详情
+  sendShopCarUrl: '/api/project/sendShopCar', // 添加购物车
+  changePeopleUrl: '/api/project/changePeople', // 修改用餐人数
+  getShopCarUrl: '/api/project/getShopCar', // 获取购物车数据
+  changeShopCarUrl: '/api/project/changeShopCar' // 修改购物车数量
 }

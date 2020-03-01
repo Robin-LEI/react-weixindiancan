@@ -17,3 +17,11 @@
 1. http://localhost:3000/?userId=orH6d1BlTsF3LiogJRJ3322BPREaSzz8&shopId=b9a5eea53c8d4f154174dbff53892e24#/welcome/shop
 
 # 多功能接口
+
+# git tag
+1. 版本管理
+2. 任何应用程序在发布的时候都应该有一个版本号
+3. NNN.abc.xxx
+   1. NNN：系统有重大更新
+   2. abc：小更新，增加新功能
+   3. xxx：修复bug，修改文字不对，修改图片不对等
