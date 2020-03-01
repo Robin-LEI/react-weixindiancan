@@ -60,7 +60,7 @@ const List = (props) => {
 
   return <div>
     <SearchBtn cb={() => {history.push('/project/search')}} icon="icon-search" />
-    <BtnLink cb={() => {history.push('/project/shop')}} icon="icon-shop_fill" style={{bottom: '0.4rem', right: '0.2rem'}}>购物车</BtnLink>
+    <BtnLink cb={() => {history.push('/shopCar')}} icon="icon-shop_fill" style={{bottom: '0.4rem', right: '0.2rem'}}>购物车</BtnLink>
     <MenuItems list={list} getClickedEle={getClickedEle}></MenuItems>
     <Nav />
     {callOut && <CallOut cancel={() => setCallOut(false)} confirm={confirm} />}

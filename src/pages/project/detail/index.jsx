@@ -33,7 +33,7 @@ const Detail = (props) => {
     }).then(res => {
       $message.success('添加购物车成功')
       setTimeout(() => {
-        props.history.push('/project/order')
+        props.history.push('/shopCar')
       }, 1000)
     })
   }

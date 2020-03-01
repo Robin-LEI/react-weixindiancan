@@ -8,5 +8,7 @@ export default {
   sendShopCarUrl: '/api/project/sendShopCar', // 添加购物车
   changePeopleUrl: '/api/project/changePeople', // 修改用餐人数
   getShopCarUrl: '/api/project/getShopCar', // 获取购物车数据
-  changeShopCarUrl: '/api/project/changeShopCar' // 修改购物车数量
+  changeShopCarUrl: '/api/project/changeShopCar', // 修改购物车数量
+  clearShopCarUrl: '/api/project/clearShopCar', // 清空购物车
+  sendOrderUrl: '/api/project/sendOrder' // 下单
 }
